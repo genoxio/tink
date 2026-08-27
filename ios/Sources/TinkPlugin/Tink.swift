@@ -5,4 +5,14 @@ import Foundation
         print(value)
         return value
     }
+    
+    
+    @objc public func openTink(_ value: String) -> String {
+        let val = "open tink ios"
+        var value = val
+        print(value)
+        return value
+    }
+    
+    
 }

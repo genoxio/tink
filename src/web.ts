@@ -7,4 +7,8 @@ export class TinkWeb extends WebPlugin implements TinkPlugin {
     console.log('ECHO', options);
     return options;
   }
+
+  async openTink(): Promise<void> {
+    // no web implementation
+  }
 }
