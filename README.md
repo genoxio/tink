@@ -12,6 +12,10 @@ npm install tink
 npx cap sync
 ```
 
+### Android flow
+
+Android is a noop, Tink integration is done using @capawesome/capacitor-in-app-browser using .openInWebView() and using the web instructions
+
 ## iOS flow
 
 This first pass follows the official Tink iOS integration pattern: build a Tink Link URL, open it in a WKWebView, and handle app redirect callbacks through the native app lifecycle.
