@@ -1,60 +1,71 @@
 # tink
 
-Capacitor plugin to authenticate with Tink
+Capacitor plugin to authenticate with Tink.
 
 ## Install
 
-To use npm
-
 ```bash
 npm install tink
-````
-
-To use yarn
-
-```bash
-yarn add tink
 ```
-
-Sync native files
 
 ```bash
 npx cap sync
 ```
 
+## iOS flow
+
+This first pass follows the official Tink iOS integration pattern: build a Tink Link URL, open it in a WKWebView, and handle app redirect callbacks through the native app lifecycle.
+
+```ts
+import { Tink } from 'tink';
+
+const result = await Tink.openTink({
+  clientId: 'YOUR_CLIENT_ID',
+  market: 'SE',
+  locale: 'en_US',
+  redirectUri: 'example://callback',
+  appUri: 'example://open',
+  autoRedirectMobile: true,
+});
+
+if (result.success && result.code) {
+  // exchange code for a user access token
+}
+```
+
+For the app-level callback, add the same deep-link handling pattern described in Tink's iOS guide:
+
+```swift
+func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+    let handled = Tink.shared.handleOpenURL(url)
+    return handled["success"] as? Bool ?? false || true
+}
+```
+
+Or post a notification:
+
+```swift
+NotificationCenter.default.post(name: .tinkLinkCallback, object: nil, userInfo: ["url": url])
+```
+
 ## API
 
-<docgen-index>
-
-* [`echo(...)`](#echo)
-* [`openTink()`](#opentink)
-
-</docgen-index>
-
-<docgen-api>
-<!--Update the source file JSDoc comments and rerun docgen to update the docs below-->
-
-### echo(...)
-
 ```typescript
-echo(options: { value: string; }) => Promise<{ value: string; }>
+openTink(options: {
+  clientId: string;
+  market: string;
+  locale?: string;
+  redirectUri: string;
+  appUri: string;
+  autoRedirectMobile?: boolean;
+  state?: string;
+  scope?: string;
+  additionalParameters?: Record<string, string>;
+}) => Promise<{
+  success: boolean;
+  code?: string;
+  error?: string;
+  userCancelled?: boolean;
+  url?: string;
+}>;
 ```
-
-| Param         | Type                            |
-| ------------- | ------------------------------- |
-| **`options`** | <code>{ value: string; }</code> |
-
-**Returns:** <code>Promise&lt;{ value: string; }&gt;</code>
-
---------------------
-
-
-### openTink()
-
-```typescript
-openTink() => Promise<void>
-```
-
---------------------
-
-</docgen-api>

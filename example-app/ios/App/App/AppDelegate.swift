@@ -6,8 +6,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    private func handleIncomingURL(_ url: URL) {
+        if url.scheme == "taxoapp" && url.host == "callback" {
+            NotificationCenter.default.post(
+                name: Notification.Name("Tink.Link.Callback"),
+                object: nil,
+                userInfo: ["url": url]
+            )
+        }
+    }
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        return true
+    }
+
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+        handleIncomingURL(url)
+        return true
+    }
+
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        guard let url = userActivity.webpageURL else { return false }
+        handleIncomingURL(url)
         return true
     }
 
