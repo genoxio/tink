@@ -15,15 +15,6 @@ class TinkPlugin : Plugin() {
     private val LOGTAG = "TinkPlugin"
 
     @PluginMethod
-    fun echo(call: PluginCall) {
-        val value: String? = call.getString("value")
-
-        val ret: JSObject = JSObject()
-        ret.put("value", implementation.echo(value))
-        call.resolve(ret)
-    }
-
-    @PluginMethod
     fun openTink(call: PluginCall) {
         Log.println(Log.INFO, LOGTAG, "open tink method")
 
