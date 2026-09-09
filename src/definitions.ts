@@ -19,7 +19,6 @@ export interface TinkOpenResult {
 }
 
 export interface TinkPlugin {
-  echo(options: { value: string }): Promise<{ value: string }>;
   openTink(options: TinkOpenOptions): Promise<TinkOpenResult>;
   handleOpenUrl(options: { url: string }): Promise<TinkOpenResult>;
   dismissTink(): Promise<{ success: boolean }>;

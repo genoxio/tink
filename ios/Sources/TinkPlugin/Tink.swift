@@ -71,11 +71,6 @@ extension Notification.Name {
         )
     }
 
-    @objc public func echo(_ value: String) -> String {
-        print(value)
-        return value
-    }
-
     public func openTink(options: TinkLinkOptions, from viewController: UIViewController, completion: @escaping ([String: Any]) -> Void) {
         let url = buildURL(from: options)
 
@@ -120,13 +115,6 @@ extension Notification.Name {
         var result: [String: Any] = ["success": false]
 
         func dismissOnMainThread() {
-//            if let controller = self.activeController {
-//                controller.dismiss(animated: true)
-//                self.activeController = nil
-//                self.activeCompletion = nil
-//                result["success"] = true
-//                return
-//            }
 
             if let presented = presentingViewController?.presentedViewController,
                presented is LinkViewController {
