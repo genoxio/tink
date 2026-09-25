@@ -23,13 +23,6 @@ public class TinkPlugin: CAPPlugin, CAPBridgedPlugin {
         category: "TinkPlugin"
     )
 
-    @objc func echo(_ call: CAPPluginCall) {
-        let value = call.getString("value") ?? ""
-        call.resolve([
-            "value": implementation.echo(value)
-        ])
-    }
-
     @objc func openTink(_ call: CAPPluginCall) {
         let rawOptions = (call.options ?? [:]) as [AnyHashable: Any]
         let stringOptions = rawOptions.reduce(into: [String: Any]()) { result, entry in
