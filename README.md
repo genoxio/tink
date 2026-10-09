@@ -1,6 +1,7 @@
 # tink
 
-Capacitor plugin to authenticate with Tink.
+Capacitor plugin for iOS to authenticate with [Tink](https://tink.com/) to retrieve Transaction data.
+Currently this supports the one-time access flow to a bank account 
 
 ## Install
 
@@ -18,7 +19,7 @@ Android is a noop, Tink integration is done using @capawesome/capacitor-in-app-b
 
 ## iOS flow
 
-This first pass follows the official Tink iOS integration pattern: build a Tink Link URL, open it in a WKWebView, and handle app redirect callbacks through the native app lifecycle.
+This first pass follows the official Tink iOS integration [pattern](https://docs.tink.com/resources/transactions/integrate-transactions-in-ios-apps): build a Tink Link URL, open it in a WKWebView, and handle app redirect callbacks through the native app lifecycle.
 
 ```ts
 import { Tink } from 'tink';
