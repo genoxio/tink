@@ -13,6 +13,7 @@ public struct TinkLinkOptions {
     public let autoRedirectMobile: Bool
     public let state: String?
     public let scope: String?
+    public let authCode: String?
     public let additionalParameters: [String: String]
 
     public static func from(capacitorOptions: [String: Any]) -> TinkLinkOptions {
@@ -24,6 +25,7 @@ public struct TinkLinkOptions {
         let autoRedirectMobile = capacitorOptions["autoRedirectMobile"] as? Bool ?? true
         let state = capacitorOptions["state"] as? String
         let scope = capacitorOptions["scope"] as? String
+        let authCode = capacitorOptions["authorization_code"] as? String
         let additionalParameters = (capacitorOptions["additionalParameters"] as? [String: String]) ?? [:]
 
         return TinkLinkOptions(
@@ -35,6 +37,7 @@ public struct TinkLinkOptions {
             autoRedirectMobile: autoRedirectMobile,
             state: state,
             scope: scope,
+            authCode: authCode,
             additionalParameters: additionalParameters
         )
     }
@@ -155,6 +158,10 @@ extension Notification.Name {
 
         if let scope = options.scope {
             items.append(URLQueryItem(name: "scope", value: scope))
+        }
+        
+        if let authCode = options.authCode {
+            items.append(URLQueryItem(name: "authorization_code", value: authCode))
         }
 
         for (key, value) in options.additionalParameters {

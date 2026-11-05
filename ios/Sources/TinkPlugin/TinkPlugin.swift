@@ -12,7 +12,6 @@ public class TinkPlugin: CAPPlugin, CAPBridgedPlugin {
     public let identifier = "TinkPlugin"
     public let jsName = "Tink"
     public let pluginMethods: [CAPPluginMethod] = [
-        CAPPluginMethod(name: "echo", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "openTink", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "handleOpenUrl", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "dismissTink", returnType: CAPPluginReturnPromise)

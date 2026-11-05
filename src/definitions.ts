@@ -7,6 +7,7 @@ export interface TinkOpenOptions {
   autoRedirectMobile?: boolean;
   state?: string;
   scope?: string;
+  authCode?: string;
   additionalParameters?: Record<string, string>;
 }
 
